@@ -21,117 +21,86 @@ namespace RCCombatCalc
                       
         }
 
-        private void button1_Click(object sender, EventArgs e) // SHOW RESULTS
+        private void button1_Click(object sender, EventArgs e) // SHOW SOLO RESULTS
         {
 
-            using (FormShowResults showForm = new FormShowResults(displayTable,settings)) 
-            {
-                showForm.ShowDialog();
-            }
-                       
+            ViewResults.ShowSolo(displayTable, settings);
 
         }
 
+        private void button5_Click(object sender, EventArgs e) // SHOW TEAM RESULTS
+        {
+            ViewResults.ShowTeam(displayTable, settings);
+        }
         private void button2_Click(object sender, EventArgs e) // IMPORT LOGS
         {
-            resultTable = new Dictionary<int, ResultStringClass>();
-                        
-
-            using (FormImportLog importForm = new FormImportLog(resultTable, sortieCount++, pilotList)) // going for new sortie log set            
-            {               
-                if (importForm.ShowDialog() == DialogResult.OK)
-                {
-                    foreach (ResultStringClass newString in resultTable.Values) // add from result table to display table
-                    {
-                        displayTable.Add(newString); 
-                    }                        
-                }
-
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e) //LOAD
-        {
-            List<ResultStringClass> tmpTeamTable = new List<ResultStringClass>();
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {                
-                openFileDialog.Filter = "log files (*.log)|*.log|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 0;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {            
-
-                    //Read the contents of the file into a stream
-                    var fileStream = openFileDialog.OpenFile();
-
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        displayTable = new List<ResultStringClass>();
-                        pilotList = new AutoCompleteStringCollection();
-                        string jsonString;
-                        while ((jsonString = reader.ReadLine()) != null) 
-                        {
-                            ResultStringClass r = JsonSerializer.Deserialize<ResultStringClass>(jsonString);
-                            displayTable.Add(r); // load new string to single result table
-                            sortieCount = r.sortieNo + 1;
-
-                    
-                            Boolean newPilot = true;
-                            foreach (string rr in pilotList) 
-                            {
-                                if (rr == r.name)
-                                {
-                                    newPilot = false;
-                                }
-                            }
-                            if (newPilot) 
-                            { 
-                                pilotList.Add(r.name); // fill AutoComplete prompt table
-                            } 
-                        }
-                        
-                    }
-                }
-            }
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)  //SAVE
-        {
-            StreamWriter myStream;
-
-            using (SaveFileDialog saveFileDialog1 = new SaveFileDialog())
+            
+            using (FormImportLog importForm = new FormImportLog(displayTable, sortieCount++, pilotList)) // going for new sortie log set        
             {
-
-                saveFileDialog1.Filter = "log files (*.log)|*.log|All files (*.*)|*.*";
-                saveFileDialog1.FilterIndex = 0;
-                saveFileDialog1.RestoreDirectory = true;
-                saveFileDialog1.OverwritePrompt = true;
-
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    if ((myStream = new StreamWriter(saveFileDialog1.FileName)) != null)
+                importForm.ShowDialog();
+                
+                
+                    label14.Text = "";
+                    foreach (string rr in pilotList)
                     {
-                        // Saving displayTable only, other info can be recovered from it
+                        label14.Text += (rr + '\n'); // and main window text
+                    }                                  
 
-                        string jsonString;
-                        foreach (ResultStringClass r in displayTable)
-                        {
-                            jsonString = JsonSerializer.Serialize<ResultStringClass>(r);
-                            myStream.WriteLine(jsonString);
-                        }
-                        myStream.Close();
-                    }
-                }
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) //LOAD MAIN FILE
         {
+            displayTable = new List<ResultStringClass>();
+            sortieCount = FileManager.LoadMain(displayTable, pilotList);            
+            
+            label14.Text = "";
+            foreach (string rr in pilotList)
+            {
+                label14.Text += (rr + '\n'); // and main window text
+            }
+
 
         }
-       
+
+        private void button4_Click(object sender, EventArgs e)  //SAVE MAIN FILE
+        {
+            FileManager.SaveMain(displayTable);
+        }
+
+               
+
+        private void button6_Click(object sender, EventArgs e) // APPLY SETTINGS
+        {
+            settings.airKill = Int32.Parse(maskedTextBox1.Text);
+            settings.killAssist = Int32.Parse(maskedTextBox2.Text);
+            settings.airHit = Int32.Parse(maskedTextBox3.Text);
+            settings.groundHit = Int32.Parse(maskedTextBox4.Text);
+            settings.stayAlive = Int32.Parse(maskedTextBox5.Text);
+            settings.friendlyAir = Int32.Parse(maskedTextBox6.Text);
+            settings.friendlyGround = Int32.Parse(maskedTextBox7.Text);
+            
+        }
+
+        private void button7_Click(object sender, EventArgs e) // LOAD SETTINGS
+        {
+            FileManager.LoadSettings(settings);
+
+            // now adjust form values
+            
+            maskedTextBox1.Text = settings.airKill.ToString();
+            maskedTextBox2.Text = settings.killAssist.ToString();
+            maskedTextBox3.Text = settings.airHit.ToString();
+            maskedTextBox4.Text = settings.groundHit.ToString();
+            maskedTextBox5.Text = settings.stayAlive.ToString();
+            maskedTextBox6.Text = settings.friendlyAir.ToString();
+            maskedTextBox7.Text = settings.friendlyGround.ToString();
+            
+        }
+
+        private void button8_Click(object sender, EventArgs e) // SAVE SETTINGS
+        {
+            FileManager.SaveSettings(settings);           
+        }
     }
 }

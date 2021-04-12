@@ -51,11 +51,15 @@ namespace RCCombatCalc
             curLogString.health = Int32.Parse(maskedTextBox1.Text);
             curLogString.gunId = Int32.Parse(maskedTextBox2.Text);
             curLogString.roundsFired = Int32.Parse(maskedTextBox3.Text);
-            curLogString.name = textBox1.Text;
             curLogString.team = Int32.Parse(maskedTextBox4.Text);
             curLogString.isGroundTarget = radioButton1.Checked;
 
-            if (!pilotList.Contains(curLogString.name))
+            if (radioButton1.Checked) { curLogString.name = "Ground target"; }
+            else
+            { curLogString.name = textBox1.Text; }
+
+
+            if (!pilotList.Contains(curLogString.name) && !radioButton1.Checked)
             {
                 pilotList.Add(curLogString.name);
             }

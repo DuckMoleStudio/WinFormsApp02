@@ -25,38 +25,39 @@ namespace RCCombatCalc
             log.Add(logString);
         }
 
-        public List<int> Parse(int sortieNo, List<int> gunIdIgnoreList) // MAIN PARSER
+        public Boolean ConsistencyCheck(List<int> consistencyList) // CHECK FOR INVALID GUN IDS IN HITSFROM, FORM A LIST
         {
             // consistency check now!
-            List<int> consistencyList = new List<int>();
+            
             Boolean consistency = true;
-            
-            List<int> gunIdList = new List<int>();
-            
 
-            foreach (LogStringClass ccString in log)
+            List<int> gunIdList = new List<int>();
+
+
+            foreach (LogStringClass ccString in log) // collect all present IDs
             {
                 gunIdList.Add(ccString.gunId);
             }
 
             foreach (LogStringClass ccString in log)
+            {
+                foreach (HitsFromClass ccHitsFrom in ccString.hitsFrom)
                 {
-                    foreach (HitsFromClass ccHitsFrom in ccString.hitsFrom)
+                    if (!gunIdList.Contains(ccHitsFrom.gunId) && !consistencyList.Contains(ccHitsFrom.gunId)) // found unknown gunId, must process
                     {
-                        if (!gunIdList.Contains(ccHitsFrom.gunId) && !gunIdIgnoreList.Contains(ccHitsFrom.gunId)) // found unknown gunId, must process
-                        {
-                          consistencyList.Add(ccHitsFrom.gunId);
-                          consistency = false;
-                        }
-
+                        consistencyList.Add(ccHitsFrom.gunId);
+                        consistency = false;
                     }
+
                 }
-            if (!consistency) return consistencyList;
+            }
+            return consistency;
 
+        }
 
-                
-           
-
+        public void Parse(int sortieNo, List<int> gunIdIgnoreList) // MAIN PARSER
+        {
+            
             // init table, general
             foreach (LogStringClass ccString in log)
             {
@@ -135,7 +136,7 @@ namespace RCCombatCalc
             {
                 displayTable.Add(newString);
             }
-            return consistencyList;
+            
             
 
         }

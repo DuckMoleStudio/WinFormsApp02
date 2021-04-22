@@ -20,7 +20,8 @@ namespace RCCombatCalc
             label2.Text = "";
             foreach (int c in consistencyList)
             {
-                label2.Text += c + '\n';
+                label2.Text += c;
+                label2.Text += '\n';
             }
         }
 

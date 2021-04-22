@@ -63,7 +63,6 @@ namespace RCCombatCalc
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Location = new System.Drawing.Point(9, 123);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 23);
@@ -95,7 +94,6 @@ namespace RCCombatCalc
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Location = new System.Drawing.Point(12, 239);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(122, 23);
@@ -129,14 +127,13 @@ namespace RCCombatCalc
             this.label7.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label7.Location = new System.Drawing.Point(277, 341);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(105, 12);
+            this.label7.Size = new System.Drawing.Size(143, 12);
             this.label7.TabIndex = 10;
-            this.label7.Text = "(c) DuckMole Studio 2021";
+            this.label7.Text = "v1.0 beta (c) DuckMole Studio 2021";
             // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Location = new System.Drawing.Point(10, 152);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(121, 23);
@@ -321,7 +318,6 @@ namespace RCCombatCalc
             // button7
             // 
             this.button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Location = new System.Drawing.Point(544, 238);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(132, 23);

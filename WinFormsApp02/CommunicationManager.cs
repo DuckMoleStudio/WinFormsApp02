@@ -9,6 +9,15 @@ namespace RCCombatCalc
 {
     class CommunicationManager
     {
+
+        #region New vars (for parse etc) 
+        // ADDED BY DUCKMOLE FOR PARSING NEEDS
+        LogStringClass curLogString;
+        public enum RequestType { Other, Info, Log };
+        RequestType req = RequestType.Other; // from BFOutProcessor
+        BFOutProcessor outProcessor = new BFOutProcessor();
+        #endregion
+
         #region Manager Enums
         /// <summary>
         /// enumeration to hold our transmission types
@@ -19,8 +28,10 @@ namespace RCCombatCalc
         /// enumeration to hold our message types
         /// </summary>
         public enum MessageType { Incoming, Outgoing, Normal, Warning, Error };
-        #endregion
 
+        
+        #endregion
+                       
         #region Manager Variables
         //property variables
         private string _baudRate = string.Empty;
@@ -132,8 +143,9 @@ namespace RCCombatCalc
         /// Comstructor to set the properties of our
         /// serial port communicator to nothing
         /// </summary>
-        public CommunicationManager()
+        public CommunicationManager(LogStringClass curLogString)
         {
+            this.curLogString = curLogString;
             _baudRate = string.Empty;
             _parity = string.Empty;
             _stopBits = string.Empty;
@@ -146,8 +158,9 @@ namespace RCCombatCalc
         #endregion
 
         #region WriteData
-        public void WriteData(string msg)
+        public void WriteData(string msg, RequestType req)
         {
+            this.req = req; // MARK A REQUEST FOR PROCESSOR
             switch (CurrentTransmissionType)
             {
                 case TransmissionType.Text:
@@ -155,9 +168,9 @@ namespace RCCombatCalc
                     //if its not open then open it
                     if (!(comPort.IsOpen == true)) comPort.Open();
                     //send the message to the port
-                    comPort.Write(msg);
-                    //display the message
-                    DisplayData(MessageType.Outgoing, msg + "\n");
+                    comPort.Write(msg + Environment.NewLine); // CR
+                    
+
                     break;
                 case TransmissionType.Hex:
                     try
@@ -184,11 +197,10 @@ namespace RCCombatCalc
                     //if its not open then open it
                     if (!(comPort.IsOpen == true)) comPort.Open();
                     //send the message to the port
-                    comPort.Write(msg);
-                    //display the message
-                    DisplayData(MessageType.Outgoing, msg + "\n");
+                    comPort.Write(msg + Environment.NewLine); // CR
+                    
                     break;
-                    break;
+                    
             }
         }
         #endregion
@@ -242,7 +254,7 @@ namespace RCCombatCalc
         /// </summary>
         /// <param name="type">MessageType of the message</param>
         /// <param name="msg">Message to display</param>
-        [STAThread]
+        [STAThread] // needed for correct work with COM ports to avoid conflicts with WIN message system
         private void DisplayData(MessageType type, string msg)
         {
             _displayWindow.Invoke(new EventHandler(delegate
@@ -275,6 +287,30 @@ namespace RCCombatCalc
                 comPort.Open();
                 //display message
                 DisplayData(MessageType.Normal, "Port opened at " + DateTime.Now + "\n");
+                DisplayData(MessageType.Warning, "Now press SW1+SW2, release SW1, release SW2" + "\n");
+                //return true
+                return true;
+            }
+            catch (Exception ex)
+            {
+                DisplayData(MessageType.Error, ex.Message);
+                return false;
+            }
+        }
+        #endregion
+
+        #region ClosePort
+        public bool ClosePort()
+        {
+            try
+            {
+                //first check if the port is already open
+                //if its open then close it
+                if (comPort.IsOpen == true) comPort.Close();
+
+                //display message
+                DisplayData(MessageType.Normal, "Port closed at " + DateTime.Now + "\n");
+                
                 //return true
                 return true;
             }
@@ -332,8 +368,11 @@ namespace RCCombatCalc
                 case TransmissionType.Text:
                     //read data waiting in the buffer
                     string msg = comPort.ReadExisting();
+                    
+                    outProcessor.Parse(curLogString, (BFOutProcessor.RequestType)req, msg); // CALL FOR BF PARSER
                     //display the data to the user
-                    DisplayData(MessageType.Incoming, msg + "\n");
+                    DisplayData(MessageType.Incoming, msg);
+
                     break;
                 //user chose binary
                 case TransmissionType.Hex:

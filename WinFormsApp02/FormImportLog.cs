@@ -12,7 +12,7 @@ namespace RCCombatCalc
         AutoCompleteStringCollection pilotList;
         public List<ResultStringClass> displayTable;
         public Parser parser;
-        List<int> gunIdIgnoreList;
+        
 
 
 
@@ -22,26 +22,29 @@ namespace RCCombatCalc
             this.sortieNo = sortieNo;
             this.pilotList = pilotList;
             parser = new Parser(displayTable);
-            gunIdIgnoreList = new List<int>();
+            
             
 
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e) // GET NEW LOG
+        /*private void button1_Click(object sender, EventArgs e) // GET NEW LOG (MANUAL MOCKERY)
         {
             LogStringClass curLogString = new LogStringClass();
             
             using (FormNewString newForm = new FormNewString(curLogString, pilotList))
             {
                 if (newForm.ShowDialog() == DialogResult.OK)       //to avoid empty string adding on abnormal closing              
-                { parser.AddString(curLogString); }
+                { 
+                    parser.AddString(curLogString);
+                    label2.Text += ("Added log for: " + curLogString.name + ", team: " + curLogString.team.ToString() + '\n');
+                }
                 
             }
 
-            label2.Text += ("Added log for: " + curLogString.name + ", team: " + curLogString.team.ToString() + '\n');
+            
            
-        }
+        }*/
 
         private void button2_Click(object sender, EventArgs e) // PARSE LOGS
         {
@@ -49,21 +52,47 @@ namespace RCCombatCalc
             // check consistency, if ok -- exit, if not, run ignore|add script
 
             List<int> consistencyList = new List<int>();
-            consistencyList = parser.Parse(sortieNo, gunIdIgnoreList);
+            List<int> gunIdIgnoreList = new List<int>();
 
-            if (consistencyList.Equals(null)) // all clear
-            { this.Close(); }
-            
-            else // deal with inconsistency (spawn a winform, show bad ID's and update ignore list)
+            if (parser.ConsistencyCheck(consistencyList)) // if ok, parse
             {
-                using (FormConsistency newForm = new FormConsistency(consistencyList, gunIdIgnoreList)) 
+                parser.Parse(sortieNo, gunIdIgnoreList);
+                this.Close();
+            }
+            else // if not, deal with inconsistency (spawn a winform, show bad ID's and update ignore list)
+            {
+                using (FormConsistency newForm = new FormConsistency(consistencyList, gunIdIgnoreList))
                 {
-                    newForm.ShowDialog();
+                    if (newForm.ShowDialog() == DialogResult.Ignore)
+                    {
+                        parser.Parse(sortieNo, gunIdIgnoreList);
+                        this.Close();
+                    }
+                    else 
+                    {
+                        this.DialogResult = DialogResult.None; // continue import, do not close
+                    }
                 }
             }
 
-                       
-           
+
+        }
+
+        private void button3_Click(object sender, EventArgs e) // CONNECTION & IMPORT
+        {
+            LogStringClass curLogString = new LogStringClass();
+
+            using (FormConnection newForm = new FormConnection(curLogString, pilotList))
+            {
+                if (newForm.ShowDialog() == DialogResult.OK)       //to avoid empty string adding on abnormal closing              
+                { 
+                    parser.AddString(curLogString);
+                    label2.Text += ("Added log for: " + curLogString.name + ", team: " + curLogString.team.ToString() + '\n');
+                }
+
+            }
+
+            
         }
     }
 }

@@ -9,7 +9,7 @@ namespace RCCombatCalc
         List<int> consistencyList;
         List<int> gunIdIgnoreList;
 
-
+        #region MAIN
         public FormConsistency(List<int> consistencyList, List<int> gunIdIgnoreList)
         {
             this.consistencyList = consistencyList;
@@ -24,12 +24,16 @@ namespace RCCombatCalc
                 label2.Text += '\n';
             }
         }
+        #endregion
 
+        #region ADD
         private void button1_Click(object sender, EventArgs e) // continue input
         {
             this.Close();
         }
+        #endregion
 
+        #region IGNORE
         private void button2_Click(object sender, EventArgs e) // add to ignore list
         {
             foreach (int c in consistencyList) 
@@ -37,5 +41,6 @@ namespace RCCombatCalc
 
                 this.Close();
         }
+        #endregion
     }
 }

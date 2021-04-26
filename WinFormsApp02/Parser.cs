@@ -8,23 +8,29 @@ namespace RCCombatCalc
 {
     public class Parser
     {
+        #region VARS
         public Dictionary<int, ResultStringClass> resultTable;
         public List<LogStringClass> log;
         public List<ResultStringClass> displayTable;
+        #endregion
 
+        #region CONSTRUCTOR
         public Parser(List<ResultStringClass> displayTable) 
         {
             resultTable = new Dictionary<int, ResultStringClass>();
             log = new List<LogStringClass>();
             this.displayTable = displayTable;
-
         }
+        #endregion
 
+        #region ADD A STRING TO LOG (BEFORE PARSING)
         public void AddString(LogStringClass logString) // new single log string
         {
             log.Add(logString);
         }
+        #endregion
 
+        #region CONSISTENCY
         public Boolean ConsistencyCheck(List<int> consistencyList) // CHECK FOR INVALID GUN IDS IN HITSFROM, FORM A LIST
         {
             // consistency check now!
@@ -54,7 +60,9 @@ namespace RCCombatCalc
             return consistency;
 
         }
+        #endregion
 
+        #region MAIN PARSER
         public void Parse(int sortieNo, List<int> gunIdIgnoreList) // MAIN PARSER
         {
             
@@ -64,7 +72,6 @@ namespace RCCombatCalc
                 if (!ccString.isGroundTarget)
                     resultTable.Add(ccString.gunId, new ResultStringClass(ccString.name, ccString.team, sortieNo, ccString.roundsFired, 0, 0, 0, 0, 0, 0, 0, 0, "none"));
             }
-
 
 
             // now process main part
@@ -126,20 +133,16 @@ namespace RCCombatCalc
                             { resultTable[ccHitsFrom.gunId].groupKills += 1; }
                         }
                     }
-
                 }
-
-
             }
 
             foreach (ResultStringClass newString in resultTable.Values) // add from result table to display table 
             {
                 displayTable.Add(newString);
-            }
-            
-            
+            }                    
 
         }
-    
+        #endregion
+
     }
 }

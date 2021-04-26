@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace RCCombatCalc
 {
-    public class LogStringClass
+    public class LogStringClass // DATA WE ACQUIRE FROM BF SYSTEM AND PARSE TO ResultStringClass
     {
         public String name;
         public int team;

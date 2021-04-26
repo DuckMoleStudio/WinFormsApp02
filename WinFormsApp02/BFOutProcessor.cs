@@ -28,7 +28,7 @@ namespace RCCombatCalc
             {
                 bf_out = buffer;
                 buffer = "";
-                switch (req)
+                switch (req) // process depending on request, currently processing only "log read" request
                 {
                     case RequestType.Info:
                         

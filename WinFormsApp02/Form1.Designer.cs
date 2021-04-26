@@ -76,7 +76,7 @@ namespace RCCombatCalc
             this.button2.Location = new System.Drawing.Point(8, 181);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 23);
-            this.button2.TabIndex = 1;
+            this.button2.TabIndex = 2;
             this.button2.Text = "Import logs";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -137,7 +137,7 @@ namespace RCCombatCalc
             this.button5.Location = new System.Drawing.Point(10, 152);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(121, 23);
-            this.button5.TabIndex = 11;
+            this.button5.TabIndex = 1;
             this.button5.Text = "View TEAM";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -148,7 +148,7 @@ namespace RCCombatCalc
             this.maskedTextBox1.Mask = "000";
             this.maskedTextBox1.Name = "maskedTextBox1";
             this.maskedTextBox1.Size = new System.Drawing.Size(35, 23);
-            this.maskedTextBox1.TabIndex = 12;
+            this.maskedTextBox1.TabIndex = 5;
             this.maskedTextBox1.Text = "100";
             this.maskedTextBox1.ValidatingType = typeof(int);
             // 
@@ -158,7 +158,7 @@ namespace RCCombatCalc
             this.maskedTextBox2.Mask = "000";
             this.maskedTextBox2.Name = "maskedTextBox2";
             this.maskedTextBox2.Size = new System.Drawing.Size(35, 23);
-            this.maskedTextBox2.TabIndex = 13;
+            this.maskedTextBox2.TabIndex = 6;
             this.maskedTextBox2.Text = "50";
             this.maskedTextBox2.ValidatingType = typeof(int);
             // 
@@ -168,7 +168,7 @@ namespace RCCombatCalc
             this.maskedTextBox3.Mask = "00";
             this.maskedTextBox3.Name = "maskedTextBox3";
             this.maskedTextBox3.Size = new System.Drawing.Size(35, 23);
-            this.maskedTextBox3.TabIndex = 14;
+            this.maskedTextBox3.TabIndex = 7;
             this.maskedTextBox3.Text = "1";
             this.maskedTextBox3.ValidatingType = typeof(int);
             // 
@@ -178,7 +178,7 @@ namespace RCCombatCalc
             this.maskedTextBox4.Mask = "00";
             this.maskedTextBox4.Name = "maskedTextBox4";
             this.maskedTextBox4.Size = new System.Drawing.Size(35, 23);
-            this.maskedTextBox4.TabIndex = 15;
+            this.maskedTextBox4.TabIndex = 8;
             this.maskedTextBox4.Text = "10";
             this.maskedTextBox4.ValidatingType = typeof(int);
             // 
@@ -188,7 +188,7 @@ namespace RCCombatCalc
             this.maskedTextBox5.Mask = "000";
             this.maskedTextBox5.Name = "maskedTextBox5";
             this.maskedTextBox5.Size = new System.Drawing.Size(35, 23);
-            this.maskedTextBox5.TabIndex = 16;
+            this.maskedTextBox5.TabIndex = 9;
             this.maskedTextBox5.Text = "50";
             this.maskedTextBox5.ValidatingType = typeof(int);
             // 
@@ -263,7 +263,7 @@ namespace RCCombatCalc
             this.maskedTextBox6.Mask = "00";
             this.maskedTextBox6.Name = "maskedTextBox6";
             this.maskedTextBox6.Size = new System.Drawing.Size(36, 23);
-            this.maskedTextBox6.TabIndex = 24;
+            this.maskedTextBox6.TabIndex = 10;
             this.maskedTextBox6.Text = "10";
             this.maskedTextBox6.ValidatingType = typeof(int);
             // 
@@ -273,7 +273,7 @@ namespace RCCombatCalc
             this.maskedTextBox7.Mask = "00";
             this.maskedTextBox7.Name = "maskedTextBox7";
             this.maskedTextBox7.Size = new System.Drawing.Size(36, 23);
-            this.maskedTextBox7.TabIndex = 25;
+            this.maskedTextBox7.TabIndex = 11;
             this.maskedTextBox7.Text = "1";
             this.maskedTextBox7.ValidatingType = typeof(int);
             // 
@@ -310,7 +310,7 @@ namespace RCCombatCalc
             this.button6.Location = new System.Drawing.Point(544, 209);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(132, 23);
-            this.button6.TabIndex = 29;
+            this.button6.TabIndex = 12;
             this.button6.Text = "Apply";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -321,7 +321,7 @@ namespace RCCombatCalc
             this.button7.Location = new System.Drawing.Point(544, 238);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(132, 23);
-            this.button7.TabIndex = 30;
+            this.button7.TabIndex = 13;
             this.button7.Text = "Load settings";
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);

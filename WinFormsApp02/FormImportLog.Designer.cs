@@ -53,7 +53,7 @@ namespace RCCombatCalc
             this.button2.Location = new System.Drawing.Point(310, 168);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 34);
-            this.button2.TabIndex = 2;
+            this.button2.TabIndex = 1;
             this.button2.Text = "Parse logs";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -71,7 +71,7 @@ namespace RCCombatCalc
             this.button3.Location = new System.Drawing.Point(12, 166);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(128, 36);
-            this.button3.TabIndex = 4;
+            this.button3.TabIndex = 0;
             this.button3.Text = "Get log";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);

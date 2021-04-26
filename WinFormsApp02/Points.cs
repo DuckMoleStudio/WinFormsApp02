@@ -4,7 +4,8 @@ namespace RCCombatCalc
 {
     public static class Points
     {
-        public static int CalcSolo(ResultStringClass r, SettingsClass s) 
+        #region SOLO
+        public static int CalcSolo(ResultStringClass r, SettingsClass s) // CALCULATE POINTS FOR SOLO RESULTS
         {
             int points = 0;
             points += r.soloKills * s.airKill;
@@ -15,8 +16,10 @@ namespace RCCombatCalc
 
             return points;
         }
+        #endregion
 
-        public static int CalcTeam(ResultStringClass r, SettingsClass s)
+        #region TEAM
+        public static int CalcTeam(ResultStringClass r, SettingsClass s) // CALCULATE POINTS FOR TEAM RESULTS
         {
             int points = 0;
             points += r.soloKills * s.airKill;
@@ -29,5 +32,6 @@ namespace RCCombatCalc
 
             return points;
         }
+        #endregion
     }
 }

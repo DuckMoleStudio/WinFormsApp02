@@ -8,8 +8,8 @@ namespace RCCombatCalc
 {
     public static class ViewResults  // generate & show result tables
     {
-               
 
+        #region SHOW SOLO
         public static void ShowSolo(List<ResultStringClass> displayTable, SettingsClass settings) // SOLO RESULTS
         {
 
@@ -67,7 +67,9 @@ namespace RCCombatCalc
             displayForm.Show();  // dialog unneccessary, may spawn many o'em
                                  
         }
+        #endregion
 
+        #region SHOW TEAM
         public static void ShowTeam(List<ResultStringClass> displayTable, SettingsClass settings) // TEAM RESULTS
         {
             List<ResultStringClass> displayTeamTable = new List<ResultStringClass>();
@@ -176,6 +178,6 @@ namespace RCCombatCalc
             displayForm.Show();  // dialog unneccessary, may spawn many o'em           
         }
 
-
+        #endregion
     }
 }

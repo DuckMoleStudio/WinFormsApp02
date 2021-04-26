@@ -3,7 +3,7 @@
 
 namespace RCCombatCalc
 {
-    public class ResultStringClass
+    public class ResultStringClass // DATA WE STORE IN TABLES & FILES
     {
         public String name { get; set; }
         public int team { get; set; }

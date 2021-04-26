@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -13,12 +6,14 @@ namespace RCCombatCalc
 {
     public partial class FormConnection : Form
     {
-       
-        
+        #region VARS        
         string transType = string.Empty;
         CommunicationManager comm;
         LogStringClass curLogString;
         AutoCompleteStringCollection pilotList;
+        #endregion
+
+        #region MAIN
         public FormConnection(LogStringClass logString, AutoCompleteStringCollection pilotList)
         {
             this.curLogString = logString;
@@ -32,7 +27,9 @@ namespace RCCombatCalc
             textBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
+        #endregion
 
+        #region ON-LOAD INITIALIZATION
         private void FormConnection_Load(object sender, EventArgs e) // INIT PORT LIST & BUTTONS STATE
         {
             comm.SetPortNameValues(cboPort);
@@ -43,7 +40,9 @@ namespace RCCombatCalc
             button3.Enabled = false;
             button4.Enabled = false;
         }
+        #endregion
 
+        #region OPEN PORT
         private void cmdOpen_Click(object sender, EventArgs e) // OPEN PORT
         {
             comm.PortName = cboPort.Text;
@@ -63,11 +62,9 @@ namespace RCCombatCalc
                 button4.Enabled = true;
             }
         }
+        #endregion
 
-        
-
-              
-
+        #region CLOSE PORT
         private void cmdClose_Click(object sender, EventArgs e) // CLOSE PORT 
         {
             if (comm.ClosePort())
@@ -79,20 +76,26 @@ namespace RCCombatCalc
                 button4.Enabled = false;
             }
         }
+        #endregion
 
+        #region VIEW INFO, NO ACTION
         private void button1_Click(object sender, EventArgs e) // get info
         {
             comm.WriteData("info", CommunicationManager.RequestType.Info);
            
         }
+        #endregion
 
+        #region GET LOG AND PROCESS
         private void button2_Click(object sender, EventArgs e) // get log
         {
             comm.WriteData("log read", CommunicationManager.RequestType.Log);
             button3.Enabled = true;
 
         }
+        #endregion
 
+        #region SUBMIT RESULTS
         private void button3_Click(object sender, EventArgs e) // SUBMIT
         {
             curLogString.team = Int32.Parse(maskedTextBox1.Text);
@@ -111,10 +114,13 @@ namespace RCCombatCalc
             comm.ClosePort();
             this.Close();
         }
+        #endregion
 
+        #region SEND LOG ERASE COMMAND
         private void button4_Click(object sender, EventArgs e) // CLEAR LOG
         {
             comm.WriteData("log erase", CommunicationManager.RequestType.Other);
         }
+        #endregion
     }
 }

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-
-using System.Text;
 using System.Text.Json;
-
 using System.Windows.Forms;
 
 namespace RCCombatCalc
 {
     public static class FileManager
     {
+
+        #region LOAD MAIN
         public static int LoadMain(List<ResultStringClass> displayTable, AutoCompleteStringCollection pilotList) // LOAD MAIN
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -19,19 +18,19 @@ namespace RCCombatCalc
                 openFileDialog.FilterIndex = 0;
                 openFileDialog.RestoreDirectory = true;
 
-                int sortieNo=100;
+                int sortieNo = 100;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
 
                     //Read the contents of the file into a stream
                     var fileStream = openFileDialog.OpenFile();
-                    
+
 
                     using (StreamReader reader = new StreamReader(fileStream))
                     {
                         pilotList.Clear();
-                        
+
                         string jsonString;
                         while ((jsonString = reader.ReadLine()) != null)
                         {
@@ -61,9 +60,11 @@ namespace RCCombatCalc
                 }
                 return sortieNo;
             }
-            
-        }
 
+        }
+        #endregion
+
+        #region SAVE MAIN
         public static void SaveMain(List<ResultStringClass> displayTable)    // SAVE MAIN
         {
             StreamWriter myStream;
@@ -93,8 +94,9 @@ namespace RCCombatCalc
                 }
             }
         }
+        #endregion
 
-
+        #region LOAD SETTINGS
         public static void LoadSettings(SettingsClass settings)      // LOAD SETTINGS
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -131,7 +133,9 @@ namespace RCCombatCalc
                 }
             }
         }
+        #endregion
 
+        #region SAVE SETTINGS
         public static void SaveSettings(SettingsClass settings)   // SAVE SETTINGS
         {
             StreamWriter myStream;
@@ -156,5 +160,6 @@ namespace RCCombatCalc
                 }
             }
         }
+        #endregion
     }
 }

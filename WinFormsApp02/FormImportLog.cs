@@ -7,45 +7,26 @@ namespace RCCombatCalc
     public partial class FormImportLog : Form
     {
 
-        
+        #region VARS
         int sortieNo;
         AutoCompleteStringCollection pilotList;
         public List<ResultStringClass> displayTable;
         public Parser parser;
-        
+        #endregion
 
-
-
+        #region MAIN
         public FormImportLog(List<ResultStringClass> displayTable, int sortieNo, AutoCompleteStringCollection pilotList)
         {
             this.displayTable = displayTable;
             this.sortieNo = sortieNo;
             this.pilotList = pilotList;
-            parser = new Parser(displayTable);
-            
-            
+            parser = new Parser(displayTable);                      
 
             InitializeComponent();
         }
+        #endregion
 
-        /*private void button1_Click(object sender, EventArgs e) // GET NEW LOG (MANUAL MOCKERY)
-        {
-            LogStringClass curLogString = new LogStringClass();
-            
-            using (FormNewString newForm = new FormNewString(curLogString, pilotList))
-            {
-                if (newForm.ShowDialog() == DialogResult.OK)       //to avoid empty string adding on abnormal closing              
-                { 
-                    parser.AddString(curLogString);
-                    label2.Text += ("Added log for: " + curLogString.name + ", team: " + curLogString.team.ToString() + '\n');
-                }
-                
-            }
-
-            
-           
-        }*/
-
+        #region PARSE LOGS
         private void button2_Click(object sender, EventArgs e) // PARSE LOGS
         {
 
@@ -75,9 +56,10 @@ namespace RCCombatCalc
                 }
             }
 
-
         }
+        #endregion
 
+        #region GET NEW LOG
         private void button3_Click(object sender, EventArgs e) // CONNECTION & IMPORT
         {
             LogStringClass curLogString = new LogStringClass();
@@ -89,10 +71,8 @@ namespace RCCombatCalc
                     parser.AddString(curLogString);
                     label2.Text += ("Added log for: " + curLogString.name + ", team: " + curLogString.team.ToString() + '\n');
                 }
-
-            }
-
-            
+            }            
         }
+        #endregion
     }
 }

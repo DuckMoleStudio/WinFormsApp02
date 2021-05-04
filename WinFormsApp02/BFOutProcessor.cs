@@ -19,6 +19,7 @@ namespace RCCombatCalc
 
         public void Parse(LogStringClass logString, RequestType req, string msg) 
         {
+            //this should be moved out of class. Parser should just parse.
             buffer += msg;
             //if (buffer.[buffer.Length - 1] == '>') // we may parse, or we may not (if buffer not complete), therefore this is NOT static
             if (buffer.EndsWith('>'))

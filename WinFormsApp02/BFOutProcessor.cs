@@ -7,24 +7,23 @@ namespace RCCombatCalc
     public class BFOutProcessor
     {
         public enum RequestType { Other, Info, Log };
-        public string buffer;
-        public string bf_out;
 
-        public int ammo;
-        
-        public BFOutProcessor() 
-        {
-            this.buffer = "";
-            this.bf_out = "";
-            ammo = 1800; // in case we call for log before getting settings value
-        }
+        //to me moved our of class
+        public string buffer = "";
+        //to me moved our of class
+        public int ammo = 1800; // in case we call for log before getting settings value
+
+        //may be it should be split t0:
+        // 1. public LogStringClass ParseLogString(string msg)
+        // 2. public ParseInfo(string msg)
 
         public void Parse(LogStringClass logString, RequestType req, string msg) 
         {
             buffer += msg;
-            if (buffer[buffer.Length - 1] == '>') // we may parse, or we may not (if buffer not complete), therefore this is NOT static
+            //if (buffer.[buffer.Length - 1] == '>') // we may parse, or we may not (if buffer not complete), therefore this is NOT static
+            if (buffer.EndsWith('>'))
             {
-                bf_out = buffer;
+                string bf_out = buffer;
                 buffer = "";
                 string[] digits = Regex.Split(bf_out, @"\D+");
 

@@ -44,6 +44,7 @@ namespace RCCombatCalc
             {
                 gunIdList.Add(ccString.gunId);
             }
+            //gunIdList.AddRange(log.Select(x => x.gunId));
 
             foreach (LogStringClass ccString in log)
             {
@@ -57,6 +58,13 @@ namespace RCCombatCalc
 
                 }
             }
+
+            //List<int> allLogIds = log.SelectMany(log => log.hitsFrom, (log, hitsFrom) => hitsFrom.gunId).Distinct().ToList();
+            //List<int> wrongIds = allLogIds.Except(gunIdList).ToList();
+            //consistencyList.AddRange(wrongIds);
+            //consistencyList = consistencyList.Distinct().ToList();
+            //consistency = wrongIds.Count == 0;
+
             return consistency;
 
         }
@@ -139,7 +147,8 @@ namespace RCCombatCalc
             foreach (ResultStringClass newString in resultTable.Values) // add from result table to display table 
             {
                 displayTable.Add(newString);
-            }                    
+            }
+            //displayTable.AddRange(resultTable.Values);
 
         }
         #endregion

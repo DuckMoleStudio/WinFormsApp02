@@ -32,6 +32,24 @@ namespace RCCombatCalc
 
             return points;
         }
+
+        public static int Calc(ResultStringClass r, SettingsClass s, bool isTeamMode) // CALCULATE POINTS FOR TEAM RESULTS
+        {
+            int points = 0;
+            points += r.soloKills * s.airKill;
+            points += r.groupKills * s.killAssist;
+            points += r.hitsAchieved * s.airHit;
+            points += r.hitsGround * s.groundHit;
+            if (r.killed == 0) points += s.stayAlive;
+            if (isTeamMode)
+            {
+                points -= r.ffAir * s.friendlyAir;
+                points -= r.ffGround * s.friendlyGround;
+            }
+
+            return points;
+        }
+
         #endregion
     }
 }

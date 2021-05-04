@@ -52,6 +52,12 @@ namespace RCCombatCalc
                                 pilotList.Add(r.name); // fill AutoComplete prompt table
 
                             }
+
+                            //if (!pilotList.Contains(r.name))
+                            //{
+                            //    pilotList.Add(r.name);
+                            //}
+
                         }
 
                     }

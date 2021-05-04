@@ -35,5 +35,7 @@ namespace RCCombatCalc
             this.condGround = condGround;
             this.winBonus = winBonus;
         }
+
+
     }
 }

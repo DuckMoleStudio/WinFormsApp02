@@ -62,6 +62,7 @@ namespace RCCombatCalc
         #region GET NEW LOG
         private void button3_Click(object sender, EventArgs e) // CONNECTION & IMPORT
         {
+            //what for we create it here????
             LogStringClass curLogString = new LogStringClass();
 
             using (FormConnection newForm = new FormConnection(curLogString, pilotList))

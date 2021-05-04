@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace RCCombatCalc
 {
@@ -40,15 +40,15 @@ namespace RCCombatCalc
 
         public bool Equals(LogStringClass other)
         {
-            
-           return other != null &&
-           name == other.name &&
-           team == other.team &&
-           roundsFired == other.roundsFired &&
-           isGroundTarget == other.isGroundTarget &&
-           health == other.health &&
-           gunId == other.gunId &&
-           EqualityComparer<List<HitsFromClass>>.Default.Equals(hitsFrom, other.hitsFrom);
+
+            return other != null &&
+            name == other.name &&
+            team == other.team &&
+            roundsFired == other.roundsFired &&
+            isGroundTarget == other.isGroundTarget &&
+            health == other.health &&
+            gunId == other.gunId &&
+            (hitsFrom == null ? other.hitsFrom == null : hitsFrom.SequenceEqual(other.hitsFrom)); 
         }
 
         public override int GetHashCode()

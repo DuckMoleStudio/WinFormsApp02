@@ -74,9 +74,7 @@ namespace RCCombatCalc.Tests
             //String name, int team, int roundsFired, Boolean isGroundTarget, int health, int gunId, List<HitsFromClass> hitsFrom
             LogStringClass checkLogString = new LogStringClass(null, 0, 500, false, 100, 8, new List<HitsFromClass> { new HitsFromClass(2, 20), new HitsFromClass(3, 30) });
 
-            //Assert.AreEqual(checkLogString, testLogString;
-            Assert.AreEqual(checkLogString.hitsFrom, testLogString.hitsFrom);
-
+            Assert.AreEqual(checkLogString, testLogString);
         }
     }
 }

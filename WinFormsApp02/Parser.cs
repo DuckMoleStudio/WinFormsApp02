@@ -122,14 +122,14 @@ namespace RCCombatCalc
 
                     foreach (HitsFromClass ccHitsFrom in ccString.hitsFrom)
                     {
-                        if (ccHitsFrom.hits >= (resultTable[ccString.gunId].hitsTaken * 0.7)) // solo kill, hardwired criteria
+                        if (ccHitsFrom.hits >= (resultTable[ccString.gunId].hitsTaken * 0.7) && !gunIdIgnoreList.Contains(ccHitsFrom.gunId)) // solo kill, hardwired criteria
                         {
                             resultTable[ccHitsFrom.gunId].soloKills += 1;
                             resultTable[ccString.gunId].killedBy = resultTable[ccHitsFrom.gunId].name;
                         }
                         else
                         {
-                            if (ccHitsFrom.hits > (resultTable[ccString.gunId].hitsTaken * 0.3)) // group kill, hardwired criteria
+                            if (ccHitsFrom.hits > (resultTable[ccString.gunId].hitsTaken * 0.3) && !gunIdIgnoreList.Contains(ccHitsFrom.gunId)) // group kill, hardwired criteria
                             { resultTable[ccHitsFrom.gunId].groupKills += 1; }
                         }
                     }

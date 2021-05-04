@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RCCombatCalc", "WinFormsApp02\RCCombatCalc.csproj", "{9F7EC8D9-6C4E-4932-87D1-AAAC32C98F0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RCCombatCalcTests", "RCCombatCalcTests\RCCombatCalcTests.csproj", "{91D7B13C-36E5-4893-8C74-EF601628EF4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9F7EC8D9-6C4E-4932-87D1-AAAC32C98F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F7EC8D9-6C4E-4932-87D1-AAAC32C98F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F7EC8D9-6C4E-4932-87D1-AAAC32C98F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91D7B13C-36E5-4893-8C74-EF601628EF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91D7B13C-36E5-4893-8C74-EF601628EF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91D7B13C-36E5-4893-8C74-EF601628EF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91D7B13C-36E5-4893-8C74-EF601628EF4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

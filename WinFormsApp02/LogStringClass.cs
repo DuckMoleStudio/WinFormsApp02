@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 namespace RCCombatCalc
 {
-    public class LogStringClass // DATA WE ACQUIRE FROM BF SYSTEM AND PARSE TO ResultStringClass
+    public class LogStringClass : IEquatable<LogStringClass>
+    // DATA WE ACQUIRE FROM BF SYSTEM AND PARSE TO ResultStringClass
     {
         public String name;
         public int team;
@@ -30,6 +31,29 @@ namespace RCCombatCalc
             this.health = health;
             this.gunId = gunId;
             this.hitsFrom = hitsFrom;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as LogStringClass);
+        }
+
+        public bool Equals(LogStringClass other)
+        {
+            
+           return other != null &&
+           name == other.name &&
+           team == other.team &&
+           roundsFired == other.roundsFired &&
+           isGroundTarget == other.isGroundTarget &&
+           health == other.health &&
+           gunId == other.gunId &&
+           EqualityComparer<List<HitsFromClass>>.Default.Equals(hitsFrom, other.hitsFrom);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(name, team, roundsFired, isGroundTarget, health, gunId, hitsFrom);
         }
     }
 }

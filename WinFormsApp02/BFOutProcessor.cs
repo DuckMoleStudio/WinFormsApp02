@@ -15,7 +15,8 @@ namespace RCCombatCalc
 
         //may be it should be split t0:
         // 1. public LogStringClass ParseLogString(string msg)
-        // 2. public ParseInfo(string msg)
+        // 2. public int ParseInfo(string msg) 
+        // or may be even public InfoString ParseInfo(string msg) in case we'll need something else, not just ammo
 
         public void Parse(LogStringClass logString, RequestType req, string msg) 
         {

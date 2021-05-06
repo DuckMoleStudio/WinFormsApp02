@@ -12,10 +12,11 @@ namespace RCCombatCalc
 
         #region New vars (for parse etc) 
         // ADDED BY DUCKMOLE FOR PARSING NEEDS
-        LogStringClass curLogString;
+        BFDataClass dataBF;
+        public string buffer = "";
         public enum RequestType { Other, Info, Log };
-        RequestType req = RequestType.Other; // from BFOutProcessor
-        BFOutProcessor outProcessor = new BFOutProcessor();
+        RequestType req = RequestType.Other; // for BFOutProcessor
+        
         #endregion
 
         #region Manager Enums
@@ -143,9 +144,9 @@ namespace RCCombatCalc
         /// Comstructor to set the properties of our
         /// serial port communicator to nothing
         /// </summary>
-        public CommunicationManager(LogStringClass curLogString)
+        public CommunicationManager(BFDataClass dataBF)
         {
-            this.curLogString = curLogString;
+            this.dataBF = dataBF;
             _baudRate = string.Empty;
             _parity = string.Empty;
             _stopBits = string.Empty;
@@ -368,9 +369,14 @@ namespace RCCombatCalc
                 case TransmissionType.Text:
                     //read data waiting in the buffer
                     string msg = comPort.ReadExisting();
-                    
-                    outProcessor.Parse(curLogString, (BFOutProcessor.RequestType)req, msg); // CALL FOR BF PARSER
-                    //display the data to the user
+                    buffer += msg;
+                    if (buffer.EndsWith('>'))
+                    {
+                        BFOutProcessor.Parse(dataBF, (BFOutProcessor.RequestType)req, buffer); // CALL FOR BF PARSER
+                        buffer = "";
+                    }
+                        
+                        //display the data to the user
                     DisplayData(MessageType.Incoming, msg);
 
                     break;

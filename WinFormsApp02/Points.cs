@@ -33,7 +33,7 @@ namespace RCCombatCalc
             return points;
         }
 
-        public static int Calc(ResultStringClass r, SettingsClass s, bool isTeamMode) // CALCULATE POINTS FOR TEAM RESULTS
+        public static int Calc(ResultStringClass r, SettingsClass s, bool isTeamMode) // COMBINED
         {
             int points = 0;
             points += r.soloKills * s.airKill;

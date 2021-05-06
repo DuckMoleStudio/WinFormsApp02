@@ -11,6 +11,7 @@ namespace RCCombatCalc
         CommunicationManager comm;
         LogStringClass curLogString;
         AutoCompleteStringCollection pilotList;
+        BFDataClass dataBF;
         #endregion
 
         #region MAIN
@@ -18,7 +19,8 @@ namespace RCCombatCalc
         {
             this.curLogString = logString;
             this.pilotList = pilotList;
-            comm = new CommunicationManager(logString);
+            dataBF = new();
+            comm = new CommunicationManager(dataBF);
 
             comm.CurrentTransmissionType = RCCombatCalc.CommunicationManager.TransmissionType.Text;
 
@@ -100,6 +102,10 @@ namespace RCCombatCalc
         {
             curLogString.team = Int32.Parse(maskedTextBox1.Text);
             curLogString.isGroundTarget = radioButton1.Checked;
+            curLogString.roundsFired = dataBF.ammoInit - dataBF.ammoLeft;
+            curLogString.gunId = dataBF.iD;
+            curLogString.health = dataBF.health;
+            curLogString.hitsFrom = dataBF.hits;
 
             if (radioButton1.Checked) { curLogString.name = "Ground target"; }
             else

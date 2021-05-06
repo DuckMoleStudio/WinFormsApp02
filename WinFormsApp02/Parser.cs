@@ -37,14 +37,9 @@ namespace RCCombatCalc
             
             Boolean consistency = true;
 
-            List<int> gunIdList = new List<int>();
-
-
-            foreach (LogStringClass ccString in log) // collect all present IDs
-            {
-                gunIdList.Add(ccString.gunId);
-            }
-            //gunIdList.AddRange(log.Select(x => x.gunId));
+            List<int> gunIdList = new List<int>();                      
+            
+            gunIdList.AddRange(log.Select(x => x.gunId)); // collect all present IDs
 
             foreach (LogStringClass ccString in log)
             {
@@ -144,11 +139,8 @@ namespace RCCombatCalc
                 }
             }
 
-            foreach (ResultStringClass newString in resultTable.Values) // add from result table to display table 
-            {
-                displayTable.Add(newString);
-            }
-            //displayTable.AddRange(resultTable.Values);
+            
+            displayTable.AddRange(resultTable.Values); // add from result table to display table 
 
         }
         #endregion

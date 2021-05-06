@@ -36,27 +36,12 @@ namespace RCCombatCalc
                         {
                             ResultStringClass r = JsonSerializer.Deserialize<ResultStringClass>(jsonString);
                             displayTable.Add(r); // load new string to single result table
-                            sortieNo = r.sortieNo + 1;
+                            sortieNo = r.sortieNo + 1;                                                                                
 
-
-                            Boolean newPilot = true;
-                            foreach (string rr in pilotList)
+                            if (!pilotList.Contains(r.name))
                             {
-                                if (rr == r.name)
-                                {
-                                    newPilot = false;
-                                }
+                                pilotList.Add(r.name);
                             }
-                            if (newPilot)
-                            {
-                                pilotList.Add(r.name); // fill AutoComplete prompt table
-
-                            }
-
-                            //if (!pilotList.Contains(r.name))
-                            //{
-                            //    pilotList.Add(r.name);
-                            //}
 
                         }
 
